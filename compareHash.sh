@@ -1,3 +1,4 @@
+# !/usr/bin/env bash
 # Author: Anthony Tropeano
 # Date: 10/13/2023
 
@@ -20,18 +21,9 @@ if [[ $filePath == "-h" || $filePath == "--help" || $filePah == "-help" ]]; then
     exit 0
 fi
 
-if [[ -z $filePath ]]; then
-    echo "Please provide a file path.\nEx: compareHash.sh /path/to/file.txt hashValue hashType"
-    exit 1
-fi
-
-if [[ -z $hashValue ]]; then
-    echo "Please provide a hash value.\nEx: compareHash.sh /path/to/file.txt hashValue hashType"
-    exit 1
-fi
-
-if [[ -z $hashType ]]; then
-    echo "Please provide a hash type.\nEx: compareHash.sh /path/to/file.txt hashValue hashType"
+# check if hashType is valid
+if ! printf '%s\n' "${hashTypes[@]}" | grep -q -w "$hashType"; then
+    echo -e "Please provide a valid hash type.\nAcceptable hash types: md5, sha1, sha256, sha512"
     exit 1
 fi
 
@@ -40,21 +32,15 @@ if [[ ! -f $filePath ]]; then
     exit 1
 fi
 
-if [[ ! ${hashTypes[(ie)$hashType]} -le ${#hashTypes} ]]; then
-    echo "Please provide a valid hash type.\nAcceptable hash types: md5, sha1, sha256, sha512"
-    exit 1
-fi
-
 fileHash=$(openssl $hashType $filePath | awk '{print $2}')
 
 # compare the hash values
 # convert both to lowercase to ensure that the comparison is case insensitive
+fileHash=$(echo $fileHash | tr '[:upper:]' '[:lower:]')
+hashValue=$(echo $hashValue | tr '[:upper:]' '[:lower:]')
 
-
-if [[ ${fileHash:l} == ${hashValue:l} ]]; then
+if [[ $fileHash == $hashValue ]]; then
     echo "True"
 else
-    # echo the hash values to the console
-    
     echo "False"
 fi
