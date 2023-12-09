@@ -23,10 +23,10 @@ git clone https://github.com/iiTONELOC/compare-hash.git
 Update the bashrc file to add the alias, I have gone with compareHash but you can name it whatever you would like!
 
 ```bash
-nano ~./bashrc
+nano ~/.bashrc
 
 #if MAC or using ZSH
-nano ~./zshrc
+nano ~/.zshrc
 
 # Then add your alias to the bottom of the file using the following syntax
 alias <aliasName>="</path/to/compareHash.sh>"
