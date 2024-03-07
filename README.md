@@ -49,16 +49,16 @@ A Powershell script has been provided that creates a function called CompareHash
 
 #### Set Execution Policy
 
-Default Powershell settings forbid executing local scripts. To install, the execution policy needs to be changed to `RemoteSigned`. Start Powershell as an Administrator and run the following command:
+Default Powershell settings forbid executing local scripts. To install, the execution policy needs to be changed to `Unrestricted`. Start Powershell as an Administrator and run the following command:
 
 ```bash
-Set-ExecutionPolicy RemoteSigned
+Set-ExecutionPolicy Unrestricted
 ```
 
 #### Execute the Install Script
 
 ```bash
-Powershell.exe -File .\AddCompareHash.ps1
+.\AddCompareHash.ps1
 
 # Reload the profile
 
@@ -71,21 +71,21 @@ Powershell.exe -File .\AddCompareHash.ps1
 
 Integrity can be verified using the following command syntax compareHash `/path/to/file <ListedHashFromWebSite> <algorithm>`.
 
-Here is an example command verifying a download of Ubuntu Jammy:
+Here is an example command verifying against the compareHash.sh file:
 
 ```bash
-compareHash ~/Downloads/ubuntu-22.04.3-live-server-arm64.iso 5702372d25111e24d59596de62ae24daef873018cbf63c9dd9ff12292a57aca9 sha256
+compareHash ~/path/to/compareHash.sh bdfff66afcce77d2d40e37a873b8e4b617e5d0f7cfb2aa9fc26b948f52429d93 sha256
 True # Expected Output
 ```
 
 ### On Windows
 
-The usage is the same as Linux/MacOs, except the name is CompareHash rather than compareHash therefore the syntax is CompareHash `\path\to\file <ListedHashFromWebSite> <algorithm>`
+The usage is the same as Linux/MacOs, except the name is CompareHash rather than compareHash therefore the syntax is CompareHash `\path	oile <ListedHashFromWebSite> <algorithm>`
 
-Here is an example of verifying a SHA256 hash for downloaded MSYS2 tools for Windows:
+Here is an example of verifying a SHA256 hash for the AddCompareHash PowerShell Script:
 
 ```bash
-CompareHash ~\Downloads\msys2-x86_64-20231026.exe 642c03a64c228927e2fdcc4353d3970ee4cf668d7150138540420051b6b4a60c sha256
+CompareHash ~\path\to\AddCompareHash.ps1 c52caa2667d3f328ec80a92601b8b97ffd48db5055ba7896ee01ed4ef4ff3d1e sha256
 True #Expected Output
 ```
 
@@ -102,6 +102,7 @@ True #Expected Output
 
 Help can be accessed by using the -h flag or using --help.
 
-## LiCENSE
+## LICENSE
 
 This project is licensed with an MIT license [which can be viewed here](./LICENSE)
+
